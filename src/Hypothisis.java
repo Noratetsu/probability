@@ -1,13 +1,19 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 
+
+/**
+ * enum to store hypothesis information
+ * @author Brandon Keen
+ *
+ */
 public enum Hypothisis {
 	
 	
 	
-	h1,h2,h3,h4,h5;
+	h1,h2,h3,h4,h5;//there are 5 bags, so 5 hypothesis
 	
+	/**
+	 * @return prior value for hypothesis given self
+	 */
 	public double getPrior()
 	{
 		double retVal;
@@ -24,6 +30,9 @@ public enum Hypothisis {
 		return retVal;
 	}
 	
+	/**
+	 * @return value of cherry given self
+	 */
 	public double getCherry()
 	{
 		double retVal;
@@ -40,6 +49,9 @@ public enum Hypothisis {
 		return retVal;
 	}
 	
+	/**
+	 * @return value of lime given self
+	 */
 	public double getLime()
 	{
 		double retVal;
