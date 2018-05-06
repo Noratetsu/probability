@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public enum Hypothisis {
 	
@@ -52,6 +55,8 @@ public enum Hypothisis {
 		
 		return retVal;
 	}
+	
+	
 	
 
 }

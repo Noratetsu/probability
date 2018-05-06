@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class compute_a_posterior {
 	
@@ -25,14 +28,14 @@ public class compute_a_posterior {
 		observeCherry(0);
 		observeLime(0);
 		
-		for(int i = 1; i < obsLength; i++)
+		for(int i = 0; i < obsLength; i++)
 		{
 			if(observation.charAt(i) == 'C')
 				observeCherry(i);
 			else
 				observeLime(i);
 			System.out.println(obsLength);
-			System.out.println(observation.charAt(i-1) + "at i = " + i );
+			System.out.println(observation.charAt(i) + "at i = " + i );
 			System.out.println(h1Prob[i]);
 			System.out.println(h2Prob[i]);
 			System.out.println(h3Prob[i]);
@@ -43,7 +46,7 @@ public class compute_a_posterior {
 			
 		}
 		
-		
+		writeResults();
 	
 		
 	}
@@ -58,17 +61,18 @@ public class compute_a_posterior {
 	
 	public static double cherryProb(int i, double d)
 	{
-		double retVal = 0.0;
+		
 		switch(i)
 		{
-		case 1: retVal = Hypothisis.h1.getCherry() * d; break;
-		case 2: retVal = Hypothisis.h2.getCherry() * d; break;
-		case 3: retVal = Hypothisis.h3.getCherry() * d; break;
-		case 4: retVal = Hypothisis.h4.getCherry() * d; break;
-		case 5: retVal = Hypothisis.h5.getCherry() * d; break;
+		case 1: return Hypothisis.h1.getCherry() * d; 
+		case 2: return Hypothisis.h2.getCherry() * d; 
+		case 3: return Hypothisis.h3.getCherry() * d; 
+		case 4: return Hypothisis.h4.getCherry() * d; 
+		case 5: return Hypothisis.h5.getCherry() * d;
 		}
 		
-		return retVal;
+		return 0;
+		
 	}
 	
 	public static double limeProb(int i, double d)
@@ -117,5 +121,53 @@ public class compute_a_posterior {
 		else
 			return (limeProb(1,h1Prob[i]) + limeProb(2,h2Prob[i]) + limeProb(3,h3Prob[i]) + limeProb(4,h4Prob[i]) + limeProb(5,h5Prob[i]));
 				
+	}
+	
+	public static void writeResults()
+	{
+		FileWriter fw = null;
+		BufferedWriter buffer = null;
+		try {
+			fw = new FileWriter("results.txt");
+			buffer = new BufferedWriter(fw);
+			buffer.write("Observation Sequence Q: " + observation + "\n");
+			buffer.write("Length of Q: " + obsLength + "\n\n");
+			
+			for(int i = 1; i < obsLength; i++)
+			{
+				buffer.write("After Observation " + i + " : " + observation.charAt(i-1)+ "\n\n");
+				buffer.write("P(h1 | Q ) = " + h1Prob[i] + "\n");
+				buffer.write("P(h2 | Q ) = " + h2Prob[i] + "\n");
+				buffer.write("P(h3 | Q ) = " + h3Prob[i] + "\n");
+				buffer.write("P(h4 | Q ) = " + h4Prob[i] + "\n");
+				buffer.write("P(h5 | Q ) = " + h5Prob[i] + "\n\n");
+				buffer.write("Probability that the next candy we pick will be C, given Q: " + next(true,i)+ "\n");
+				buffer.write("Probability that the next candy we pick will be L, given Q: " + next(false,i)+ "\n\n");
+			}
+			
+			buffer.write("After Observation " + obsLength + " : " + observation.charAt(obsLength-1)+ "\n\n");
+			buffer.write("P(h1 | Q ) = " + h1Prob[obsLength] + "\n");
+			buffer.write("P(h2 | Q ) = " + h2Prob[obsLength] + "\n");
+			buffer.write("P(h3 | Q ) = " + h3Prob[obsLength] + "\n");
+			buffer.write("P(h4 | Q ) = " + h4Prob[obsLength] + "\n");
+			buffer.write("P(h5 | Q ) = " + h5Prob[obsLength] + "\n\n");
+			buffer.write("Probability that the next candy we pick will be C, given Q: " + next(true,obsLength)+ "\n");
+			buffer.write("Probability that the next candy we pick will be L, given Q: " + next(false,obsLength)+ "\n\n");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				buffer.close();
+				fw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 	}
 }
