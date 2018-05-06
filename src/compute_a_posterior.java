@@ -136,23 +136,45 @@ public class compute_a_posterior {
 			for(int i = 1; i < obsLength; i++)
 			{
 				buffer.write("After Observation " + i + " : " + observation.charAt(i-1)+ "\n\n");
+				buffer.newLine();
+				buffer.newLine();
 				buffer.write("P(h1 | Q ) = " + h1Prob[i] + "\n");
+				buffer.newLine();
 				buffer.write("P(h2 | Q ) = " + h2Prob[i] + "\n");
+				buffer.newLine();
 				buffer.write("P(h3 | Q ) = " + h3Prob[i] + "\n");
+				buffer.newLine();
 				buffer.write("P(h4 | Q ) = " + h4Prob[i] + "\n");
+				buffer.newLine();
 				buffer.write("P(h5 | Q ) = " + h5Prob[i] + "\n\n");
+				buffer.newLine();
+				buffer.newLine();
 				buffer.write("Probability that the next candy we pick will be C, given Q: " + next(true,i)+ "\n");
+				buffer.newLine();
 				buffer.write("Probability that the next candy we pick will be L, given Q: " + next(false,i)+ "\n\n");
+				buffer.newLine();
+				buffer.newLine();
 			}
 			
 			buffer.write("After Observation " + obsLength + " : " + observation.charAt(obsLength-1)+ "\n\n");
+			buffer.newLine();
+			buffer.newLine();
 			buffer.write("P(h1 | Q ) = " + h1Prob[obsLength] + "\n");
+			buffer.newLine();
 			buffer.write("P(h2 | Q ) = " + h2Prob[obsLength] + "\n");
+			buffer.newLine();
 			buffer.write("P(h3 | Q ) = " + h3Prob[obsLength] + "\n");
+			buffer.newLine();
 			buffer.write("P(h4 | Q ) = " + h4Prob[obsLength] + "\n");
+			buffer.newLine();
 			buffer.write("P(h5 | Q ) = " + h5Prob[obsLength] + "\n\n");
+			buffer.newLine();
+			buffer.newLine();
 			buffer.write("Probability that the next candy we pick will be C, given Q: " + next(true,obsLength)+ "\n");
+			buffer.newLine();
 			buffer.write("Probability that the next candy we pick will be L, given Q: " + next(false,obsLength)+ "\n\n");
+			buffer.newLine();
+			buffer.newLine();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
